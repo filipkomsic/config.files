@@ -1,0 +1,46 @@
+# KEYBINDZ
+
+# launch cheat.sh
+super + c 
+	cheat
+	
+# lanuch wttr
+super + w 
+	weather
+
+# launch newsboat
+
+super + n
+	st -f fontawesome:medium:size=14 -e newsboat
+
+## Music control ##
+
+# Next Track
+
+XF86AudioNext
+	mpc next
+
+# Previous Track
+
+XF86AudioPrev
+	mpc prev
+
+# Play-pause
+
+XF86AudioPlay
+	mpc toggle
+
+# Volume Up
+
+XF86AudioRaiseVolume
+	mpc volume +5
+
+# Volume Down 
+
+XF86AudioLowerVolume
+	mpc volume -5
+
+# MUTE MASTE VOLUME
+
+XF86AudioStop
+	pulseaudio-ctl mute
