@@ -1,0 +1,34 @@
+
+browser brave
+external-url-viewer "urlview"
+
+show-title-bar no
+text-width 100
+
+highlight feedlist "~.*$" yellow default bold 
+
+
+bind-key U show-urls
+bind-key j down 
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key u pageup
+bind-key l open
+bind-key h quit
+bind-key n next-unread
+bind-key N prev-unread
+bind-key D pb-download
+
+color background	default	default
+color listnormal	default default
+color listfocus		blue yellow bold dim standout
+color listnormal_unread	magenta default dim 
+color listfocus_unread	blue yellow bold dim standout
+color info		yellow default bold dim
+color article 		default default	
