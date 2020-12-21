@@ -3,7 +3,9 @@
 SAVEHIST=1000
 HISTFILE=~/.zhistory
 export HISTSIZE=1000
-
+export EDITOR=/usr/bin/nvim
+export TERMINAL=/usr/local/bin/st
+export SHELL=/bin/zsh
 
 ## Prompt
 
@@ -47,28 +49,50 @@ alias music="ncmpcpp"
 alias cp="cp -iv" 
 alias scriptup="sudo ~/scripts/update_dmenu_run.sh"
 alias kmap="~/scripts/keyboard_layout_switcher.sh"
-alias p="sudo pacman" 
+alias p="sudo pacman --color=auto" 
+alias update='p -Syu && pkill -RTMIN+20 "${STATUSBAR:-dwmblocks}" '
 alias grep="grep --color=auto"
-alias st="st -f fontawesome:large:size=14"
+alias fixsound="alsactl restore"
+alias gm="cd ~/media ; ls "
+alias gdw="cd ~/dow ; ls "
+alias gdc="cd ~/dox ; ls "
+alias gc="cd ~/.config ; ls "
+alias gsc="cd ~/scripts ; ls "
+alias gsk="cd ~/suckless ; ls "
+alias gdf="cd ~/dox/FAX ; ls "
+alias gbp="cd ~/dox/FAX/BP1 ; ls "
+alias gbb="cd ~/dox/bigbrain ; ls "
+alias gba="cd ~/dox/bigbrain/articles ; ls "
+alias gbb="cd ~/dox/bigbrain/bukz ; ls "
+alias gsc="cd ~/scripts ; ls "
+alias gskl="cd ~/suckless ; ls "
+alias e="$EDITOR"
 
 
-	#Fzf Functions
+
 
 #open a script from ~/scripts in nvim
-sc(){ du -a ~/scripts | awk '{print $2}' | fzf --border=horizontal --height=30% -i --layout=reverse | xargs -r nvim }
-#open a file form ~/suckless in nvim
+sc(){ cd ~/scripts ; du -a ~/scripts | awk '{print $2}' |grep -v .git| fzf --border=horizontal --height=30% -i --layout=reverse | xargs -r nvim }
 
-skl(){ cd ~/suckless ; ls | fzf --border=horizontal --height=30% -i --layout=reverse| xargs -r nvim }
+# Write a new script
+scnew(){ read ime"?File name: " || exit 0
+	cd $HOME/scripts
+	nvim $ime ; chmod +x $ime }
+
+#open a file form ~/suckless in nvim
+skl(){ DIR=$(du -d 1 ~/suckless | awk '{print $2}' | fzf --border=horizontal --height=30% -i --layout=reverse) && cd $DIR ; ls | fzf --border=horizontal --height=30% -i --layout=reverse | xargs -r nvim }
 
 #play a movie
-mov(){ cd /home/filip/Downloads/Torrent/movies && du -a | grep '.mp4\|.mkv\|.avi' | awk '{ $1=""; print $0}' |
+mov(){ cd /home/filip/media/movies && du -a | grep '.mp4\|.mkv\|.avi' | awk '{ $1=""; print $0}' |
 	fzf --border=horizontal --height=30% -i --layout=reverse |
-	sed 's|^..|/home/filip/Downloads/Torrent/movies|g; s|^|"|g; s|$|"|g' |
+	sed 's|^..|/home/filip/media/movies|g; s|^|"|g; s|$|"|g' |
 	xargs mpv ; cd 
-
 }
+goto(){ CD=$(du ~/ | awk '{print $2}' | fzf --border=horizontal --height=30% -i --layout=reverse) && 
+	cd $CD || 
+	echo "Nothing selected :(" }
 
-
+hk(){ nvim ~/.config/sxhkd/sxhkdrc }
 
 
 
@@ -98,9 +122,6 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 path+=('/home/filip/scripts')
 
-# Start dwmbar.sh
-
-#pgrep dwmbar.sh || /home/filip/scripts/dwmbar.sh
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh 2>/dev/null
 
