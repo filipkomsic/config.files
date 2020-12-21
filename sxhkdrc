@@ -1,46 +1,87 @@
 # KEYBINDZ
 
+F2
+	note.sh
+
+
+F12
+	search.sh
+
+super + shift + w
+	/home/filip/scripts/write.sh
+
+
+super + b
+	brave-nightly
+
+# Mail
+
+super + shift + m 
+	st -e neomutt
+
+# yt-search
+
+super + z
+	/home/filip/scripts/yt-search.sh
+
 # launch cheat.sh
 super + c 
-	cheat
+	cheat.sh
 	
 # lanuch wttr
 super + w 
-	weather
+	weather.sh
+
+# history script
+
+super + shift + h
+	history.sh
 
 # launch newsboat
 
+super + r
+	st -e newsboat
+
+# launch ncmpcpp
+
+super + m
+	st -e ncmpcpp
+# launch lf file browser
+
+super + e
+	st -e lf
+
+# launch notes
+
 super + n
-	st -f fontawesome:medium:size=14 -e newsboat
+	st -e nvim -c 'Goyo|set linebreak' /home/filip/vimwiki/index.wiki
 
-## Music control ##
+# launch calcurse
 
-# Next Track
+super + shift + c 
+	st -e calcurse
 
-XF86AudioNext
-	mpc next
+# launch emojis
 
-# Previous Track
+super + shift + e
+	/home/filip/scripts/emoji.sh
 
-XF86AudioPrev
-	mpc prev
+## Audio control ##
 
-# Play-pause
+{XF86AudioMute, XF86AudioRaiseVolume, XF86AudioLowerVolume}
+	pulseaudio-ctl {mute, up, down} ; $HOME/scripts/dwmbar/volsig.sh
 
-XF86AudioPlay
+# Next Prev
+
+super + {bracketright, bracketleft}
+	mpc {next, prev}
+
+# Play-Pause
+
+Pause
 	mpc toggle
 
-# Volume Up
+## BACKLIGHT BRIGHTNESS
 
-XF86AudioRaiseVolume
-	mpc volume +5
-
-# Volume Down 
-
-XF86AudioLowerVolume
-	mpc volume -5
-
-# MUTE MASTE VOLUME
-
-XF86AudioStop
-	pulseaudio-ctl mute
+super + {Home, End}
+	xbacklight {-inc 10, -dec 10} 
